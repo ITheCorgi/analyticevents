@@ -12,4 +12,4 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /app
 COPY --from=builder /build/analytic .
 COPY --from=builder /build/config.yaml .
-CMD ["./analytic migrate up", "./analytic"]
+COPY migrations .
