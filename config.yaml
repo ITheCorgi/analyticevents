@@ -1,0 +1,13 @@
+app:
+  version: 1.0.0
+  host: localhost
+  port: 8901
+  environment: dev
+db:
+  port: 9000
+  host: localhost
+  username: analytic
+  password: password
+  database: analyticgetter
+migrations:
+  dir: ./migrations

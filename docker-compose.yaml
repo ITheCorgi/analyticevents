@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: analytic-db
+    image: bitnami/clickhouse:latest
+    restart: on-failure
+    environment:
+      CLICKHOUSE_ADMIN_USER: "analytic"
+      CLICKHOUSE_ADMIN_PASSWORD: "password"
+      CLICKHOUSE_DB: "analyticgetter"
+    ports:
+      - "9000:9000"
+      - "8123:8123"
+    expose:
+      - 9000
+      - 8123
+
+  server:
+    container_name: analytics-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8901:8901"

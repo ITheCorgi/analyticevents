@@ -1,0 +1,80 @@
+openapi: "3.0.0"
+info:
+  title: Analytic getter
+  description: Сервис сбора статистики
+  version: 1.0.0
+paths:
+  /analytics/event/streaming:
+    post:
+      tags:
+        - "analytics"
+      operationId: "addEvents"
+      summary: "Add events"
+      description: "Add evenst"
+      parameters:
+        - in: "header"
+          name: "Request-ID"
+          description: "Correlation-Id"
+          schema:
+            type: string
+      requestBody:
+        description: add table request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Event"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FailResponse"
+        500:
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FailResponse"
+
+components:
+  schemas:
+    Event:
+      type: "object"
+      properties:
+        device_id:
+          type: "string"
+          format: uuid
+        device_os:
+          type: "string"
+        session:
+          type: "string"
+        sequence:
+          type: "integer"
+        event:
+          type: "string"
+        param_int:
+          type: "integer"
+        param_str:
+          type: "string"
+      example:
+        device_id: "0287D9AA-4ADF-4B37-A60F-3E9E645C821E"
+        device_os: "iOS 13.5.1"
+        session: "ybuRi8mAUypxjbxQ"
+        sequence: 1
+        event: "app_start"
+        param_int: 0
+        param_str: "some_text"
+
+    FailResponse:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: false
+        error:
+          type: "string"
+          example: Параметр %s имеет неверное значение
