@@ -4,7 +4,7 @@ app:
   port: 8555
   environment: test
 db:
-  port: 32811
+  port: 32818
   host: localhost
   username: test
   password: password
