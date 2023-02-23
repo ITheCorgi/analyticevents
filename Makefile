@@ -18,3 +18,6 @@ build: ## Build server.
 .PHONY: migrate-up
 migrate_file: build ## make migrate up.
 	./analyticevents migrate up
+
+lint:
+	golangci-lint run
