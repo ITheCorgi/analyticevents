@@ -17,4 +17,4 @@ build: ## Build server.
 
 .PHONY: migrate-up
 migrate_file: build ## make migrate up.
-	./getground-party migrate up
+	./analyticevents migrate up
